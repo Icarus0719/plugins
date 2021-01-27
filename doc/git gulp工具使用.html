@@ -1,0 +1,246 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:004git gulp工具使用</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<h3 id="git">git</h3>
+<ul>
+<li><h4 id="git-">git使用流程</h4>
+</li>
+<li>初始化git仓储<pre><code>  git init
+</code></pre></li>
+<li>配置使用者的用户名和邮箱<pre><code>  git config --global user.name &quot;icarus&quot;
+  git config --global user.email &quot;5824472811@qq.com&quot;
+</code></pre></li>
+<li><p>将代码放入git存储中</p>
+<pre><code>  工作区、暂存区、版本库
+  git add ./    （将文件添加至暂存区）
+  git commit -m &quot;这是第一个文件&quot;    （将文件从暂存区提交至版本库）
+
+  git commit --all -m &quot;第一次提交所有文件&quot; （将文件从工作区提交至版本库）
+</code></pre></li>
+<li>命令查看当前状态<pre><code>  git status
+</code></pre></li>
+<li>.gitignore设置忽略文件<pre><code>  创建.gitignore文件，在这个文件中设置要被忽略的文件或目录，被忽略的文件不会被提交到版本库中，写法是以/开头：
+  /index.html             忽略当前文件夹下的指定文件
+  /.idea                  忽略.idea文件
+  /js                     忽略js文件夹
+  /js/*.js                忽略js文件夹下的所有js文件
+</code></pre></li>
+<li>查看日志<pre><code>  git log             查看所有日志信息
+  git log --oneline   查看简洁日志信息
+</code></pre></li>
+<li>版本回退<pre><code>  git reset --hard Head~0      回退到之前最新一次提交的版本
+  git reset --hard 9799564     回退到指定版本号的版本文件
+  git reflog                   查看历史信息日志
+</code></pre></li>
+<li><p>分支</p>
+<pre><code>  当我们的项目功能只做了一部分，不能提交到主分支上去影响别人，但是也要备份，这是就要创建自己的一个分支。
+  git branch myself           创建名为myself的分支
+  git branch                  查看所有分支
+  git checkout myself         切换至myself的分支
+  git merge myself            在master中，将myself分支合并到master中
+  git branch -d myself        在master（其他分支）中，删除myself分支
+
+  合并时有冲突，在分支上修改并上传了文件，之后又在master上又修改上传了此文件，在合并时就会发生冲突，此时只能手动修改。
+</code></pre></li>
+<li>上传至github服务器<pre><code>  git push url master             上传至github服务器的master分支
+</code></pre></li>
+<li>从github上获取文件<pre><code>  需要git init
+  git pull url master             
+  git clone url               如果多次执行会覆盖本地内容，常用的是pull
+</code></pre></li>
+<li>ssh上传代码<pre><code>  ssh-keygen -t rsa -C &quot;58244@qq.com&quot;     创建公钥和私钥
+  在C:\Users\Icarus\.ssh中找到id_rsa.pub文件，将里面的数据复制，找到github上设置中的SSH and GPG keys ，将数据粘贴进去，
+  添加一个SSH key，再git push url master上传至github上。
+</code></pre></li>
+<li>pull push的简写<pre><code>  git remote add icarus url       声明一个地址变量名，只在当前文件夹内有效，变量名没有要求，之后就可以使用icarus。
+  git push icarus master;
+  git pull icarus master;
+  之后可以使用
+  git push icarus -u master       使用-u是将当前的master分支与远程服务器上的master分支进行关联，这样以后可以直接
+  使用git push/pull直接上传或下拉了
+</code></pre></li>
+</ul>
+<h3 id="gulp">gulp</h3>
+<ul>
+<li><h4 id="gulp-">gulp使用流程</h4>
+</li>
+<li>前端自动化构建工具，对开发代码进行压缩，混淆等</li>
+<li>核心方法<pre><code>  gulp.task(&#39;任务名&#39;,function(){})       创建任务
+  gulp.src(&#39;./*.css&#39;)                    指定要处理的文件
+  gulp.dest()                            指定最终处理后的文件的存放路径
+  gulp.watch()                           自动监视文件的变化，然后执行相应的任务
+  gulp.run(&#39;任务名&#39;)                     执行任务
+</code></pre></li>
+<li><p>安装gulp</p>
+<pre><code>  npm install gulp-cli -g     全局安装gulp-cli
+</code></pre></li>
+<li><p>gulp的使用</p>
+<pre><code>  1.在当前项目中也要安装gulp
+      npm install gulp --save
+  2.在当前项目中新建一个文件：gulpfile.js，在js文件中进行操作
+      var gulp =  require(&#39;gulp&#39;);
+      // 创建任务
+      // 第一个参数: 任务名
+      // 第二个参数: 回调函数,当我们执行任务时就会执行这个函数
+      gulp.task(&#39;test&#39;, function(){
+        console.log(123)
+  })
+  3.在cmd中执行任务
+      gulp test
+</code></pre></li>
+<li>对js文件进行压缩<pre><code>  1.npm install gulp-uglify --save    安装js压缩所要的插件
+  2.在gulpfile.js中
+      var gulp =  require(&#39;gulp&#39;);
+      // 引入js压缩包
+      var uglify =  require(&#39;gulp-uglify&#39;);
+      //处理js文件
+      gulp.task(&#39;script&#39;,function(){
+      gulp.src(&#39;./app.js&#39;)
+      .pipe(uglify())
+      .pipe(gulp.dest(&#39;./dist&#39;))
+  })
+  3.在cmd中执行：gulp script
+</code></pre></li>
+<li>对js文件进行合并<pre><code>  1.npm install gulp-concat --save    安装js合并所要的插件
+  2.在gulpfile.js中
+      var gulp =  require(&#39;gulp&#39;);
+      // 引入js压缩包
+      var uglify =  require(&#39;gulp-uglify&#39;);
+      var concat =  require(&#39;gulp-concat&#39;);
+      //处理js文件
+      gulp.task(&#39;script&#39;,function(){
+      gulp.src([&#39;./app.js&#39;,&#39;./sign.js&#39;])
+      //concat的参数是合并之后的文件名
+      .piep(concat(&#39;index.js&#39;))
+      .pipe(uglify())
+      .pipe(gulp.dest(&#39;./dist&#39;))
+  })
+  3.在cmd中执行：gulp script
+</code></pre></li>
+<li>对CSS文件进行合并、压缩<pre><code>  1.npm install gulp-cssnano --save    安装css压缩所要的插件
+  2.在gulpfile.js中
+      var gulp =  require(&#39;gulp&#39;);
+      // 引入压缩包
+      var concat =  require(&#39;gulp-concat&#39;);
+      var cssnano =  require(&#39;gulp-cssnano&#39;);
+      //处理文件
+      gulp.task(&#39;style&#39;,function(){
+      gulp.src([&#39;./*.css&#39;])
+      //concat的参数是合并之后的文件名
+      .piep(concat(&#39;index.css&#39;))
+      .pipe(cssnano())
+      .pipe(gulp.dest(&#39;./dist&#39;))
+  })
+  3.在cmd中执行：gulp style
+</code></pre></li>
+<li>对html文件进行压缩<pre><code>  1.npm install gulp-htmlmin --save    安装html压缩所要的插件
+  2.在gulpfile.js中
+      var gulp =  require(&#39;gulp&#39;);
+      // 引入压缩包
+      var htmlmin =  require(&#39;gulp-htmlmin&#39;);
+      //处理文件
+      gulp.task(&#39;html&#39;,function(){
+      gulp.src([&#39;./*.css&#39;])
+      //htmlmin的参数是比较复杂，需要查看npm官网输入相关参数
+      .piep(htmlmin({collapseWhitespace:true}))
+      .pipe(gulp.dest(&#39;./dist&#39;))
+  })
+  3.在cmd中执行：gulp html
+</code></pre></li>
+<li>gulp.watch进行监视<pre><code>  //监视文件的变化，然后执行相应的任务
+  gulp.task(&#39;mywatch&#39;,function(){
+      //执行指定任务
+      gulp.run(&#39;script&#39;);
+      // 1.监视js文件的变化，然后执行script任务
+      // 第一个参数：要监视的文件的规则
+      // 第二个参数：是要执行的任务
+      gulp.watch([&#39;./app.js&#39;,&#39;sign.js&#39;],[&#39;script&#39;]);
+  })
+</code></pre></li>
+</ul>
+<meta http-equiv="refresh" content="60">
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>
