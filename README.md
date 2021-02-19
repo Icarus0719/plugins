@@ -6,6 +6,7 @@
 
 - [Animate.css](https://animate.style/)：CSS3 动画库，也是目前最通用的动画库
 - [tweenjs](http://www.createjs.cc/tweenjs/)：TweenJS 是使用 JavaScript 中的一个简单的补间动画库
+- [tweenmax](https://www.tweenmax.com.cn/)：适用于移动端和现代互联网的超高性能专业级动画插件
 - [踏得网](http://www.techbrood.com/)：H5CSS3 炫酷特效网站
 
 ## 滚动屏
